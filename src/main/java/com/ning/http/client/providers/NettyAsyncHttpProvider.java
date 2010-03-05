@@ -16,7 +16,7 @@
 package com.ning.http.client.providers;
 
 import com.ning.http.client.AsyncHandler;
-import com.ning.http.client.AsyncHandler.STATE;
+import com.ning.http.client.AsyncHandler.ACTION;
 import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.AsyncHttpProvider;
 import com.ning.http.client.ByteArrayPart;
@@ -512,15 +512,15 @@ public class NettyAsyncHttpProvider extends SimpleChannelUpstreamHandler impleme
     }
 
     private final boolean updateStatusAndInterrupt(AsyncHandler<?> handler, HttpResponseStatus c) throws Exception {
-        return (handler.onStatusReceived(c) == STATE.CONTINUE ? false : true);
+        return (handler.onStatusReceived(c) == ACTION.CONTINUE ? false : true);
     }
 
     private final boolean updateHeadersAndInterrupt(AsyncHandler<?> handler, HttpResponseHeaders c) throws Exception {
-        return (handler.onHeadersReceived(c) == STATE.CONTINUE ? false : true);
+        return (handler.onHeadersReceived(c) == ACTION.CONTINUE ? false : true);
     }
 
     private final boolean updateBodyAndInterrupt(AsyncHandler<?> handler, HttpResponseBodyPart c) throws Exception {
-        return (handler.onBodyPartReceived(c) == STATE.CONTINUE ? false : true);
+        return (handler.onBodyPartReceived(c) == ACTION.CONTINUE ? false : true);
     }
 
     //Simple marker for stopping publishing bytes.
